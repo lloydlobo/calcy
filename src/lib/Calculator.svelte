@@ -23,7 +23,8 @@
 		const numVal = value.replace(/\D/, '');
 		resOutput = numVal;
 		// return userInputChar;
-	};
+	}; // FIXME doesn't allow newlines
+	// TODO Add linebreak regex !!!
 
 	let inOut = [
 		{
@@ -35,7 +36,8 @@
 			rows: 10,
 			cols: 33,
 			style: 'bg-slate-700 text-slate-100 px-1',
-			wrap: 'hard'
+			wrap: 'soft',
+			maxlength: 333
 		},
 		{
 			index: 1,
@@ -46,7 +48,8 @@
 			rows: 10,
 			cols: 12,
 			style: 'bg-slate-700 text-teal-400 pl-2 pr-2',
-			wrap: 'hard'
+			wrap: 'hard',
+			maxlength: 12
 		}
 	];
 
@@ -69,6 +72,7 @@
 				placeholder={inOut[0].placeholder}
 				class={inOut[0].style}
 				wrap="soft"
+				maxlength={inOut[0].maxlength}
 			/>
 		</div>
 		<div class="output-interface border-l border-slate-500 text-teal-400">
@@ -91,6 +95,10 @@
 		>
 	{/each}
 </div>
+
+<!-- You can prevent newlines being entered via the input event and simply using a replace(/\n/g, '').
+https://stackoverflow.com/a/5286671
+ -->
 <!-- /* 
 {#each}
 <Input {input} {output} {afterPseudo} class="flex gap-20"/>
