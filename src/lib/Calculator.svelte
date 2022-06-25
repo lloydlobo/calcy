@@ -1,5 +1,4 @@
 <script lang="ts">
-	export let placeholder = 'Type an expression to get started';
 	/**
 	 * @type {string}
 	 */
@@ -20,6 +19,7 @@
 	let inOut = [
 		{
 			index: 0,
+			name: 'input',
 			id: 'textAreaInput',
 			text: '',
 			placeholder: 'Type an expression to get started',
@@ -29,6 +29,7 @@
 		},
 		{
 			index: 1,
+			name: 'output',
 			id: 'textAreaOutput',
 			text: '',
 			placeholder: '',
@@ -46,7 +47,7 @@
 </script>
 
 <div class="calculator max-w-full bg-slate-700 p-4 ">
-	<div class="calculator-wrapper flex justify-between">
+	<div class="calculator-wrapper flex   gap-4">
 		<div class="user-interface  ">
 			<textarea
 				bind:value={resOutput}
@@ -60,7 +61,7 @@
 		<div class="output-interface border-l border-slate-500 text-teal-400">
 			{#each inOut as { id, placeholder, style, rows, cols, index }}
 				{#if index == 1}
-					<textarea {id} {placeholder} class={style} {rows} {cols}>{resOutput} </textarea>
+					<textarea {id} {placeholder} class={style} {rows} {cols} readonly>{resOutput}</textarea>
 					<!-- {resOutput.toString().trim()} -->
 				{/if}
 			{/each}
