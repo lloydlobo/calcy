@@ -17,13 +17,40 @@
 		resOutput = '';
 	};
 
-	const inputChecker = (e) => {
+	// https://codepen.io/Sejuani/pen/vLvmwV
+
+	const inputChecker = (/** @type {{ target: any; }} */ e) => {
 		let userInputChar = e.target;
 		const value = userInputChar.value; // but textarea has no value => just use input?
-		const numVal = value.replace(/\D/, '');
-		resOutput = numVal;
-		// return userInputChar;
+
+		let spaceMultiple = value.match(/\x20+/g);
+		let space = value.match(/( )/g);
+		// TODO add a {space + (operands || operators) REGEX}
+
+		//Separate out any number of connected digits followed by an optional decimal point and additional digits, place matching patterns into an array
+		let operands = value.match(/\d+(\.\d+)?/g);
+		//Separate out +, -, /, *, or ^ characters into an array
+		let operators = value.match(/[\+\-\/\*\^\%]/g);
+		//Gets if the debug flag is set
+		let debug = value.match(/\$d/);
+
+		// console.table({ operands: operands, operators: operators, debug: debug });
+		// console.table({ operands: operands, operators: operators, space: space });
+
+		if (value == operands || value == operators || value == space) {
+			console.log('match');
+			resOutput = value;
+		} else {
+			// const numVal = value.replace(/\D/, ''); // only letters
+			const numVal = value.replace(/\D/, '');
+			// console.log('nomatch');
+			resOutput = numVal;
+		}
 	}; // FIXME doesn't allow newlines
+	// const regexPattern = `/(?<number> (?: \d+ (?:\.\d*)?)| (?:\d*\.\d+))| (?<immediate> (?<str> (?: ' (?<__str__> (?:[^'\\]|\\')*) ')| (?: \ (?<__str__>.)))| (?<operator> (?: p| \»| R| \_| \-| \°| r| \∩| \«| \∞| \∅| \~| \/| \]| C| \%| P| \*| \^| \∪| d| \[| F| l| s| \!| \+| \=| h| f| c))| (?<apply>\$)| (?<space>\s+))/mxuJ`; // https://regex101.com/r/eP0nH2/1
+	// const regex = new RegExp(regexPattern);
+	// if (numVal == regex)
+	// return userInputChar;
 	// TODO Add linebreak regex !!!
 
 	let inOut = [
