@@ -17,6 +17,26 @@
 		counter = 0;
 		resOutput = '';
 	};
+	let inOut = [
+		{
+			index: 0,
+			id: 'textAreaInput',
+			text: '',
+			placeholder: 'Type an expression to get started',
+			rows: 10,
+			cols: 33,
+			style: 'bg-slate-700 text-slate-100 px-1'
+		},
+		{
+			index: 1,
+			id: 'textAreaOutput',
+			text: '',
+			placeholder: '',
+			rows: 10,
+			cols: 12,
+			style: 'bg-slate-700 text-teal-400 pl-2 pr-2'
+		}
+	];
 
 	export let buttons = [
 		{ text: 'Increment', id: 'btnIncrement', event: handleOutput },
@@ -25,16 +45,25 @@
 	];
 </script>
 
-<div class="calculator max-w-full bg-slate-700 p-4 sm:max-w-lg">
-	<div class="calculator-wrapper flex justify-between gap-4">
+<div class="calculator max-w-full bg-slate-700 p-4 ">
+	<div class="calculator-wrapper flex justify-between">
 		<div class="user-interface  ">
-			<input bind:value={resOutput} {placeholder} type="text" class="bg-slate-700 text-slate-100" />
-			<textarea bind:value={resOutput} {placeholder} class="bg-slate-700 text-slate-100" />
+			<textarea
+				bind:value={resOutput}
+				rows={inOut[0].rows}
+				cols={inOut[0].cols}
+				id={inOut[0].id}
+				placeholder={inOut[0].placeholder}
+				class={inOut[0].style}
+			/>
 		</div>
-		<div class="output-interface border-l border-slate-500 p-4 text-teal-400">
-			<textarea class="bg-slate-700 text-slate-100">
-				{resOutput.toString()}
-			</textarea>
+		<div class="output-interface border-l border-slate-500 text-teal-400">
+			{#each inOut as { id, placeholder, style, rows, cols, index }}
+				{#if index == 1}
+					<textarea {id} {placeholder} class={style} {rows} {cols}>{resOutput} </textarea>
+					<!-- {resOutput.toString().trim()} -->
+				{/if}
+			{/each}
 		</div>
 	</div>
 
