@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { supabase } from '$lib/SupabaseLib';
 	import Header from '$lib/header/Header.svelte';
 	import '../app.css';
+	console.log(supabase);
 </script>
 
 <Header />

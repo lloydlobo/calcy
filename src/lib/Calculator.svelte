@@ -21,7 +21,10 @@
 
 	const inputChecker = (/** @type {{ target: any; }} */ e) => {
 		let userInputChar = e.target;
+		console.log(e.target.value);
+
 		const value = userInputChar.value; // but textarea has no value => just use input?
+		// console.log(value);
 
 		let spaceMultiple = value.match(/\x20+/g);
 		let space = value.match(/( )/g);
@@ -34,16 +37,16 @@
 		//Gets if the debug flag is set
 		let debug = value.match(/\$d/);
 
-		// console.table({ operands: operands, operators: operators, debug: debug });
 		// console.table({ operands: operands, operators: operators, space: space });
 
+		// TODO add hashmap or history to collect results or expressions
 		if (value == operands || value == operators || value == space) {
 			console.log('match');
 			resOutput = value;
 		} else {
 			// const numVal = value.replace(/\D/, ''); // only letters
-			const numVal = value.replace(/\D/, '');
 			// console.log('nomatch');
+			const numVal = value.replace(/\D/, '');
 			resOutput = numVal;
 		}
 	}; // FIXME doesn't allow newlines

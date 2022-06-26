@@ -12,7 +12,7 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<section class="flex flex-col justify-center items-center flex-1">
+<section class="flex flex-1 flex-col items-center justify-center">
 	<Calculator />
 	<!-- <Counter /> -->
 </section>

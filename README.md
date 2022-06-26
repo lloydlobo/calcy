@@ -14,6 +14,24 @@
 >
 > 5. Addition and subtraction.
 
+## Database
+
+### Setup
+
+```shell
+npm install @supabase/supabase-js
+```
+
+```shell
+import { createClient } from '@supabase/supabase-js'
+
+// Create a single supabase client for interacting with your database
+const supabase = createClient('https://xyzcompany.supabase.co', 'public-anon-key')
+```
+
+- **Source**: <https://github.com/supabase/supabase-js>
+- **Docs**: <https://supabase.com/docs>
+
 <!-- Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
 ## Creating a project
@@ -50,3 +68,4 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment. -->
+<!-- cspell:ignore supabase -->
