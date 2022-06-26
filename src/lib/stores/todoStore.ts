@@ -1,4 +1,6 @@
+// cspell:ignore supabase
 import { writable, type Writable } from 'svelte/store';
+import { supabase } from '$lib/SupabaseLib';
 
 export interface TodoInterface {
 	id: number;
@@ -7,6 +9,16 @@ export interface TodoInterface {
 }
 
 export const todos: Writable<TodoInterface[]> = writable([]);
+
+export const loadTodos = async () => {
+	const { data, error } = await supabase.from('todos').select();
+
+	if (error) {
+		return console.error(error);
+	}
+
+	todos.set(data);
+};
 
 export const addTodo = (text: string) => {
 	todos.update((current) => {

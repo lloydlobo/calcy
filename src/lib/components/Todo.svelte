@@ -7,7 +7,7 @@
 	// $: todoIsChecked = todo.completed === true;
 	// let now = Date.now().toString();
 
-	// let styleCompletedTodo = `${
+	// let styleCompletedTodo = `${`
 	// 	todo.completed ? 'line-through translate-y-2 ease-in shadow-none grayscale opacity-70' : ''
 	// }`;
 </script>
@@ -22,9 +22,9 @@
 		class="form-checkbox mr-2 h-5 w-5"
 	/>
 
-	<!-- contenteditable="true" -->
 	<div class="flex-1">
 		<span
+			contenteditable="true"
 			class={`todo-text flex-1 grayscale-0 text-slate-800 ${
 				todo.completed
 					? 'line-through  transition-all duration-500 ease-in shadow-none grayscale opacity-70'
