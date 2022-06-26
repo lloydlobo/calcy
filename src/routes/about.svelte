@@ -14,6 +14,10 @@
 	export const prerender = true;
 </script>
 
+<script>
+	import TodoUi from '$lib/layout/TodoUi.svelte';
+</script>
+
 <svelte:head>
 	<title>About</title>
 	<meta name="description" content="About this app" />
@@ -40,6 +44,7 @@
 		it with JavaScript disabled!
 	</p>
 </div>
+<TodoUi />
 
 <style>
 	.content {
