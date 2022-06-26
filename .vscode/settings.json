@@ -1,5 +1,7 @@
 {
   "cSpell.words": [
     "todos"
-  ]
+  ],
+  "autoHide.autoHidePanel": true,
+  "autoHide.autoHideSideBar": false
 }

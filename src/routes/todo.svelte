@@ -7,8 +7,8 @@
 </script>
 
 <script>
-	import TodoForm from '$lib/components/TodoForm.svelte';
-	import Todo from '$lib/components/Todo.svelte';
+	import TodoForm from '$lib/components/todo-local/TodoFormLocal.svelte';
+	import Todo from '$lib/components/todo-local/TodoLocal.svelte';
 	import { todos } from '$lib/stores/todoLocalStore';
 </script>
 

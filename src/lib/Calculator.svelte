@@ -128,7 +128,7 @@
 
 <!-- You can prevent newlines being entered via the input event and simply using a replace(/\n/g, '').
 https://stackoverflow.com/a/5286671
- -->
+-->
 <!-- /* 
 {#each}
 <Input {input} {output} {afterPseudo} class="flex gap-20"/>
