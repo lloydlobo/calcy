@@ -9,6 +9,12 @@ const config = {
 
 	kit: {
 		adapter: adapter(),
+		// Deploy Supabase on Vercel with Supabase's Tokens and ENV variables
+		vite: {
+			define: {
+				'process.env': process.env
+			}
+		},
 
 		// Override http methods in the Todo forms
 		methodOverride: {
@@ -18,3 +24,8 @@ const config = {
 };
 
 export default config;
+
+// cspell:ignore Supabase sveltejs
+
+// hydrate the <div id="svelte"> element in src/app.html
+// // target: '#svelte', // > config.kit.target is no longer required, and should be removed

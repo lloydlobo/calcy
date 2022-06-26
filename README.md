@@ -29,6 +29,33 @@ import { createClient } from '@supabase/supabase-js'
 const supabase = createClient('https://xyzcompany.supabase.co', 'public-anon-key')
 ```
 
+### Troubleshooting
+
+### Supabase + Vercel Deployment
+
+**Source**: <https://stackoverflow.com/a/70597662>
+
+```js
+import adapter from '@sveltejs/adapter-auto'
+
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+  kit: {
+    adapter: adapter(),
+    vite: {
+      define: {
+        'process.env': process.env,
+      },
+    },
+
+    // hydrate the <div id="svelte"> element in src/app.html
+    target: '#svelte',
+  },
+}
+
+export default config
+```
+
 - **Source**: <https://github.com/supabase/supabase-js>
 - **Docs**: <https://supabase.com/docs>
 
