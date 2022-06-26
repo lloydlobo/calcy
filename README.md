@@ -33,7 +33,7 @@ const supabase = createClient('https://xyzcompany.supabase.co', 'public-anon-key
 
 ### Supabase + Vercel Deployment
 
-**Source**: <https://stackoverflow.com/a/70597662>
+- **Source**: <https://stackoverflow.com/a/70597662>
 
 ```js
 import adapter from '@sveltejs/adapter-auto'
@@ -54,6 +54,39 @@ const config = {
 }
 
 export default config
+```
+
+- **Source**: <https://timdeschryver.dev/blog/environment-variables-with-sveltekit#the-problem>
+- When the environment variable is defined, we can now use the import.meta.env.VITE_PUBLIC_BASE_PATH variable in our code. These variables will be replaced by their corresponding values.
+
+- THE PROBLEM
+But as I mentioned before, there's one problem. When the application is served you don't notice the issue, but with the build command, the following error is thrown when the component file (which uses an environment variable) includes a style tag.
+
+- THE WORKAROUND
+The workaround to this problem is to extract the environment variables into a separate module. Next, you can simply import the environment variable into your component from this module.
+
+```ts title=variables.ts
+export const variables = {
+  basePath: import.meta.env.VITE_PUBLIC_BASE_PATH
+};
+```
+
+```svelte title=index.svelte
+<script lang="ts">
+  import { variables } from '$lib/variables';
+</script>
+
+<div>basePath: {variables.basePath}</div>
+
+```
+
+- TYPESCRIPT SUPPORT
+Lastly, you can make the environment variables type-safe by adding their types to the global.d.ts declaration file.
+
+```ts title=global.d.ts
+interface ImportMetaEnv {
+  VITE_PUBLIC_BASE_PATH: string;
+}
 ```
 
 - **Source**: <https://github.com/supabase/supabase-js>
