@@ -1,15 +1,7 @@
 <script lang="ts">
-	// import {Todo}
-	import { deleteTodo, toggleTodoCompleted } from '$lib/stores/todoStore';
-	import type { TodoInterface } from '$lib/stores/todoStore';
-	export let todo: TodoInterface; // accepting props
-	// let todoIsChecked: boolean;
-	// $: todoIsChecked = todo.completed === true;
-	// let now = Date.now().toString();
+	import { deleteTodo, toggleTodoCompleted, type TodoInterface } from '$lib/stores/todoLocalStore';
 
-	// let styleCompletedTodo = `${`
-	// 	todo.completed ? 'line-through translate-y-2 ease-in shadow-none grayscale opacity-70' : ''
-	// }`;
+	export let todo: TodoInterface; // accepting props
 </script>
 
 <li class="my-2 flex items-center rounded-lg border border-gray-200 bg-white py-2 px-4 shadow-sm">
@@ -42,7 +34,3 @@
 		>X</button
 	>
 </li>
-
-<!-- bind:innerHTML={now} -->
-<style>
-</style>

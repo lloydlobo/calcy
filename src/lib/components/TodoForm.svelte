@@ -1,21 +1,11 @@
 <script lang="ts">
-	import { spring } from 'svelte/motion';
-	import {
-		todos,
-		addTodo,
-		deleteTodo,
-		toggleTodoCompleted
-		// loadTodos,
-		// name
-	} from '$lib/stores/todoStore';
-
+	// import { spring } from 'svelte/motion';
+	import { addTodo } from '$lib/stores/todoLocalStore';
 	let todo = '';
 
-	export const handleSubmit = () => {
-		// e.preventDefault(); // add svelte binding pipe operator for conciseness
+	const handleSubmit = () => {
 		addTodo(todo);
 		todo = ''; // Reset Todo text
-
 		console.log('submitting...');
 	};
 </script>
@@ -40,4 +30,7 @@
 		class="w-full rounded-lg bg-red-600 py-2 px-4 text-slate-50 shadow-sm  duration-200 ease-in-out hover:bg-red-500 hover:text-white hover:shadow-xl hover:ease-in active:translate-y-1"
 		>Submit</button
 	>
+	<!-- on:click={handleNewUuid} -->
 </form>
+
+<!-- // e.preventDefault(); // add svelte binding pipe operator for conciseness -->

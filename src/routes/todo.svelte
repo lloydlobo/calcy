@@ -1,12 +1,15 @@
-<script content="module" lang="ts">
+<script context="module" lang="ts">
 	import { browser, dev } from '$app/env';
-	import TodoForm from '$lib/components/TodoForm.svelte';
-	import Todo from '$lib/components/Todo.svelte';
-	import { todos } from '$lib/stores/todoStore';
 
 	export const hydrate = dev;
 	export const router = browser;
 	export const prerender = true;
+</script>
+
+<script>
+	import TodoForm from '$lib/components/TodoForm.svelte';
+	import Todo from '$lib/components/Todo.svelte';
+	import { todos } from '$lib/stores/todoLocalStore';
 </script>
 
 <svelte:head>
@@ -14,11 +17,9 @@
 	<meta name="description" content="Todo" />
 </svelte:head>
 
+<!-- <div class="todo flex flex-col"> <TodoForm /> {#each $todos as todo} <Todo {todo} /> {/each} </div> -->
 <div class="todo flex flex-col">
-	<!-- <h1>To do or not to do</h1> -->
-	<!-- <p class="text-xs text-slate-500">tu tu to-do ...</p> -->
 	<TodoForm />
-	<!-- cant access store directly - so prefix with `$` sign -->
 	{#each $todos as todo}
 		<Todo {todo} />
 	{/each}

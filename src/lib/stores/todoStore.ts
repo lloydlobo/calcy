@@ -10,6 +10,8 @@ export interface TodoInterface {
 
 export const todos: Writable<TodoInterface[]> = writable([]);
 
+export const name = writable('Svelte');
+
 export const loadTodos = async () => {
 	const { data, error } = await supabase.from('todos').select();
 
@@ -20,14 +22,25 @@ export const loadTodos = async () => {
 	todos.set(data);
 };
 
-export const addTodo = (text: string) => {
-	todos.update((current) => {
-		const newTodos = [...current, { text, completed: false, id: Date.now() }];
-		return newTodos;
-	});
+export const addTodo = async (text: string, user_id: number) => {
+	const { data, error } = await supabase.from('todos').insert([{ text, user_id }]);
+
+	if (error) {
+		return console.error(error);
+	}
+
+	todos.update((current) => [...current, data[0]]);
+
+	// todos.update((current) => { const newTodos = [...current, { text, completed: false, id: Date.now() }]; return newTodos; });
 };
 
-export const deleteTodo = (id: number) => {
+export const deleteTodo = async (id: number) => {
+	const { error } = await supabase.from('todos').delete().match({ id });
+
+	if (error) {
+		console.error(error);
+	}
+
 	todos.update((todos) =>
 		todos.filter((todo) => {
 			const filterOutTodoWithThisId = todo.id !== id;
@@ -37,7 +50,13 @@ export const deleteTodo = (id: number) => {
 	); // implicit return: todos.filter((todo) => todo.id !== id)
 };
 
-export const toggleTodoCompleted = (id: number): void => {
+export const toggleTodoCompleted = async (id: number, currentState: boolean) => {
+	const { error } = await supabase.from('todos').update({ completed: !currentState }).match({ id });
+
+	if (error) {
+		console.error(error);
+	}
+
 	todos.update((todos): TodoInterface[] => {
 		let index = -1;
 		for (let i = 0; i < todos.length; i += 1) {
@@ -49,7 +68,7 @@ export const toggleTodoCompleted = (id: number): void => {
 
 		const todoIsFound = index !== -1;
 		if (todoIsFound) {
-			const ifCompletedFlipTheNewTodo = !todos[index].completed;
+			const ifCompletedFlipTheNewTodo = !todos[index].completed as boolean;
 			todos[index].completed = ifCompletedFlipTheNewTodo;
 		}
 
@@ -58,7 +77,5 @@ export const toggleTodoCompleted = (id: number): void => {
 }; // toggleTodoCompleted()
 
 // ///////////////////////////////////////////////////////////////
-
-// export const name = writable('Svelte');
 
 // CSPELL:ignore todos
