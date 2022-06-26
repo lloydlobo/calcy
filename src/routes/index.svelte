@@ -1,8 +1,8 @@
 <script context="module" lang="ts">
 	export const prerender = true;
-	import { todos } from '$lib/stores/todoSupabaseStore';
-	import TodoForm from '$lib/components/todo-server/TodoForm.svelte';
-	import Todo from '$lib/components/todo-server/Todo.svelte';
+	import { todos } from '$lib/stores/todoLocalStore';
+	import TodoForm from '$lib/components/todo-local/TodoFormLocal.svelte';
+	import Todo from '$lib/components/todo-local/TodoLocal.svelte';
 </script>
 
 <script lang="ts">

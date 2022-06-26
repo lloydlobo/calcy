@@ -1,13 +1,30 @@
 <script lang="ts">
-	import { supabase } from '$lib/SupabaseLib';
+	// import { supabase } from '$lib/SupabaseLib';
 	import Header from '$lib/header/Header.svelte';
 	import '../app.css';
-	console.log(supabase);
+	import { user } from '$lib/db/sessionStore';
+	import { supabase } from '$lib/db/supabaseClient';
+	import Profile from '$lib/db/Profile.svelte';
+	import Auth from '$lib/db/Auth.svelte';
+	// console.log(supabase);
+
+	user.set(supabase.auth.user());
+
+	supabase.auth.onAuthStateChange((_, session) => {
+		return user.set(session.user);
+	});
 </script>
 
 <Header />
-
 <main class="container mx-auto">
+	<!-- supabase login auth -->
+	<div class="user-auth mx-auto my-0 p-4 ">
+		{#if $user}
+			<Profile />
+		{:else}
+			<Auth />
+		{/if}
+	</div>
 	<slot />
 </main>
 
@@ -38,7 +55,6 @@
 	footer a {
 		font-weight: bold;
 	}
-
 	@media (min-width: 480px) {
 		footer {
 			padding: 40px 0;
